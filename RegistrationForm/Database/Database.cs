@@ -10,7 +10,7 @@ namespace RegistrationForm.Database
 {
     public static class Database
     {
-        private static string connectionString = "Server=localhost;Database=REGISTRATIONDB;Trusted_Connection=True;";
+        private static string connectionString = "Server=.\\DEFAULTSQLSERVER;Database=REGISTRATIONDB;Trusted_Connection=True;";
 
         public static void InsertUser(User user)
         {
@@ -29,7 +29,7 @@ namespace RegistrationForm.Database
             using var conn = new SqlConnection(connectionString);
             conn.Open();
 
-            var cmd = new SqlCommand("SELECT Id, Email, Name, Password FROM Users WHERE Email=@e", conn);
+            var cmd = new SqlCommand("SELECT Id, Email, Name, PasswordHash FROM Users WHERE Email=@e", conn);
             cmd.Parameters.AddWithValue("@e", email);
             using var reader = cmd.ExecuteReader();
             if (reader.Read()) 
@@ -63,7 +63,7 @@ namespace RegistrationForm.Database
             using var conn = new SqlConnection(connectionString);
             conn.Open();
             var cmd = new SqlCommand("DELETE FROM Users WHERE Id=@id", conn);
-            cmd.Parameters.AddWithValue("@id", user);
+            cmd.Parameters.AddWithValue("@id", user.Id);
             cmd.ExecuteNonQuery();
         }
 

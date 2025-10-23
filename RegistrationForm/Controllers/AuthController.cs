@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Models;
 using RegistrationForm.Database;
+using static System.Collections.Specialized.BitVector32;
+using RegistrationForm;
 
 namespace Controllers
 {
@@ -16,18 +18,20 @@ namespace Controllers
         {
             if (!Validation.IsValidEmail(email))
             {
-                return "<h2>Invalid email</h2>";   
+                return "<link rel=\"stylesheet\" href=\"style.css\"><h3>Invalid email</h3>";   
             }
 
             if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(password)) 
             {
-                return "<h2>Name and password cannot be empty</h2>";
+                return "<link rel=\"stylesheet\" href=\"style.css\"><h3>Name and password cannot be empty</h3>";
             }
+
+
 
             var existing = Database.GetUser(email);
             if (existing != null) 
             {
-                return "<h2>Email already registered";
+                return "<link rel=\"stylesheet\" href=\"style.css\"><h3>Email already registered</h3>";
             }
 
 
@@ -39,17 +43,42 @@ namespace Controllers
             };
 
             Database.InsertUser(user);
-            return "<h2>Registration successful!</h2>";
+            var html = File.ReadAllText("../../../Views/profile.html");
+            html = html.Replace("{{USER_NAME}}", user.Name);
+            html = html.Replace("{{USER_EMAIL}}", user.Email);
+
+            return html;
         }
 
-        public string Login(string email, string password)
+        public string Login(string email, string password,out string sessionId)
         {
-            return "<h2>Login successful (placeholder)</h2>";
+
+            sessionId = null;
+
+            var user = Database.GetUser(email);
+            if (user == null)
+            {
+                return "<link rel=\"stylesheet\" href=\"style.css\"><h3>User not found!</h3><a href='/login.html'>Try again</a>";
+            }
+
+            var hash = Validation.HashPassword(password);
+            if (user.PasswordHash != hash)
+            {
+                return "<link rel=\"stylesheet\" href=\"style.css\"><h3>Wrong password!</h3><a href='/login.html'>Try again</a>";
+            }
+            sessionId = SessionManager.CreateSession(email);
+
+            var html = File.ReadAllText("../../../Views/profile.html");
+            html = html.Replace("{{USER_NAME}}", user.Name);
+            html = html.Replace("{{USER_EMAIL}}", user.Email);
+
+            return html;
         }
 
-        public string Logout()
+        public string Logout(string sessionId)
         {
-            return "<h2>Logged out successfully</h2>";
+            SessionManager.RemoveSession(sessionId);
+            return File.ReadAllText("../../../Views/index.html");
         }
     }
 }

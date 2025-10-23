@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html lang="bg">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Login — RegistrationApp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="brand">RegistrationApp</div>
+                <div class="nav small">
+                    <a href="/index.html">Home</a>
+                    <a href="/register.html">Register</a>
+                </div>
+            </div>
+
+            <h2>Login</h2>
+            <p class="small">Enter email and password.</p>
+
+            <form action="/login" method="post" style="margin-top:12px">
+                <div class="form-row">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" placeholder="example@mail.com" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" placeholder="••••••••" required>
+                </div>
+
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <button class="btn" type="submit">Login</button>
+                    <a class="small" href="/register.html">No account?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

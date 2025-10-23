@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html lang="bg">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Profile — RegistrationApp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="brand">RegistrationApp</div>
+                <div class="nav small">
+                    <a href="/index.html">Home</a>
+                    <a href="/change.html">Change</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+            <h2>Profile</h2>
+            <div class="profile-row">
+                <div>
+                    <div class="small">Name</div>
+                    <div style="font-weight:600">{{USER_NAME}}</div>
+                </div>
+            </div>
+            <div class="profile-row">
+                <div>
+                    <div class="small">Email</div>
+                    <div style="font-weight:600">{{USER_EMAIL}}</div>
+                </div>
+            </div>
+            <div class="actions" style="margin-top:20px">
+                <a class="btn ghost" href="/change.html">Change</a>
+                <form action="/delete" method="post" style="display:inline" onsubmit="return confirm('Are you sure you want to delete?')">
+                    <button class="btn" type="submit">Delete account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Change Profile — RegistrationApp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <div class="brand">RegistrationApp</div>
+                <div class="nav small">
+                    <a href="/index.html">Home</a>
+                    <a href="/profile.html">Profile</a>
+                </div>
+            </div>
+
+            <h2>Change Profile</h2>
+            <p class="small">Update your name and password.</p>
+
+            <form action="/change" method="post" style="margin-top:12px">
+                <div class="form-row">
+                    <label for="newName">New Name</label>
+                    <input id="newName" name="newName" type="text" placeholder="Enter new name" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="newPassword">New Password</label>
+                    <input id="newPassword" name="newPassword" type="password" placeholder="Enter new password" required>
+                </div>
+
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <button class="btn" type="submit">Update Profile</button>
+                    <a class="small" href="/profile.html">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

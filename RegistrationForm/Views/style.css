@@ -1,0 +1,134 @@
+﻿:root {
+    --bg: #f4f6f8;
+    --card: #ffffff;
+    --accent: #2563eb;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --radius: 10px;
+    --shadow: 0 6px 18px rgba(32,33,36,0.06);
+    --maxw: 520px;
+    --gap: 14px;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+* {
+    box-sizing: border-box
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text)
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none
+}
+
+.container {
+    max-width: var(--maxw);
+    margin: 36px auto;
+    padding: 18px
+}
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.brand {
+    font-weight: 700;
+    font-size: 20px
+}
+
+.nav a {
+    margin-left: 12px;
+    font-size: 14px;
+    color: var(--muted)
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--gap)
+}
+
+label {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 6px
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #e6e9ee;
+    font-size: 14px;
+    outline: none;
+    background: #fbfdff;
+}
+
+    input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+        box-shadow: 0 0 0 4px rgba(37,99,235,0.08);
+        border-color: rgba(37,99,235,0.4)
+    }
+
+.btn {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+    .btn.ghost {
+        background: transparent;
+        color: var(--accent);
+        border: 1px solid rgba(37,99,235,0.12)
+    }
+
+.small {
+    font-size: 13px;
+    color: var(--muted)
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    align-items: center
+}
+
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f3f5
+}
+
+
+
+@media (max-width:520px) {
+    .container {
+        margin: 18px;
+        padding: 12px
+    }
+
+    :root {
+        --maxw: 92%
+    }
+}
