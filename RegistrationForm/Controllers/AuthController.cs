@@ -26,14 +26,11 @@ namespace Controllers
                 return "<link rel=\"stylesheet\" href=\"style.css\"><h3>Name and password cannot be empty</h3>";
             }
 
-
-
             var existing = Database.GetUser(email);
             if (existing != null) 
             {
                 return "<link rel=\"stylesheet\" href=\"style.css\"><h3>Email already registered</h3>";
             }
-
 
             var user = new User
             {

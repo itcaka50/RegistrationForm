@@ -26,8 +26,8 @@ namespace RegistrationForm.Utils
                 using (var ms  = new MemoryStream()) 
                 {
                     bmp.Save(ms, ImageFormat.Png);
-                string path = @"D:\\C#\\RegistrationForm\\RegistrationForm\\Views\\captcha.png";
-                Directory.CreateDirectory(Path.GetDirectoryName(path)); // Ensure folder exists
+                string path = @"../../../Views/captcha.png";
+                Directory.CreateDirectory(Path.GetDirectoryName(path)); 
                 bmp.Save(path, ImageFormat.Png);
                     imageBytes = ms.ToArray();
                 }

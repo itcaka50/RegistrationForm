@@ -1,4 +1,5 @@
 ﻿using RegistrationForm;
+using RegistrationForm.Database;
 using System;
 using System.IO;
 using System.Net;
@@ -11,6 +12,7 @@ class Program
 {
     static void Main()
     {
+        Database.InitializeDatabase();
         var server = new HttpServer(8080);
         server.Start();
     }

@@ -95,7 +95,6 @@ namespace RegistrationForm
 
                 var headerBytes = Encoding.UTF8.GetBytes(header);
                 stream.Write(headerBytes, 0, headerBytes.Length);
-
                 stream.Write(imageBytes, 0, imageBytes.Length);
             }
             catch (Exception ex)
