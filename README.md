@@ -1,3 +1,6 @@
 # RegistrationForm
+Client - Server application implementing a Register/Login form on a website written in.NET 8.0. 
 
-Client - Server приложение, реализиращо Register/Login форма на уебсайт, написано на .NET 8.0. Не е използван framework за направата му.
+No framework was used to make it. Compatible with Linux & Windows. 
+
+Description of how to run the application in the documentation.
