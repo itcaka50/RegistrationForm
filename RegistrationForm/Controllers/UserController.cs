@@ -20,7 +20,7 @@ namespace Controllers
             if (!string.IsNullOrWhiteSpace(newPassword)) user.PasswordHash = Validation.HashPassword(newPassword);
 
             Database.UpdateUser(user);
-            var html = File.ReadAllText("../../../Views/profile.html");
+            var html = File.ReadAllText(GetViewPath("profile.html"));
             html = html.Replace("{{USER_NAME}}", user.Name);
             html = html.Replace("{{USER_EMAIL}}", user.Email);
 
@@ -33,8 +33,15 @@ namespace Controllers
             if (user == null) return "<link rel=\"stylesheet\" href=\"style.css\"><h3>User not found!</h3>";
 
             Database.DeleteUser(user);
-            return File.ReadAllText("../../../Views/index.html");
+            return File.ReadAllText(GetViewPath("index.html"));
         }
+
+        private string GetViewPath(string filename)
+        {
+            string baseDir = AppContext.BaseDirectory;
+            var projectDir = Path.GetFullPath(Path.Combine(baseDir, @"../../../Views"));
+            return Path.Combine(projectDir, filename);
+        }   
     }
 }
 

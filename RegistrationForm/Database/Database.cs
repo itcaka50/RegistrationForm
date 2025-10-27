@@ -12,11 +12,11 @@ namespace RegistrationForm.Database
     public static class Database
     {
         //private static string connectionString = "Server=.\\DEFAULTSQLSERVER;Database=REGISTRATIONDB;Trusted_Connection=True;";
-        private static readonly string connectionString = "Server=localhost;Port=3306;User=root;Password=1112;Database=registrationdb;";
+        private static readonly string connectionString = "Server=localhost;Port=3306;User=root;Password=11122111;Database=registrationdb;";
 
         public static void InitializeDatabase()
         {
-            using (var conn = new MySqlConnection("Server=localhost;User=root;Password=1112;"))
+            using (var conn = new MySqlConnection("Server=localhost;User=root;Password=11122111;"))
             {
                 conn.Open();
                 using (var cmd = new MySqlCommand("CREATE DATABASE IF NOT EXISTS registrationdb;", conn))
@@ -25,7 +25,7 @@ namespace RegistrationForm.Database
                 }
             }
 
-            using (var conn = new MySqlConnection("Server=localhost;User=root;Password=1112;Database=registrationdb;"))
+            using (var conn = new MySqlConnection("Server=localhost;User=root;Password=11122111;Database=registrationdb;"))
             {
                 conn.Open();
                 string createTableQuery = @"

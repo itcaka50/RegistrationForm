@@ -40,7 +40,7 @@ namespace Controllers
             };
 
             Database.InsertUser(user);
-            var html = File.ReadAllText("../../../Views/profile.html");
+            var html = File.ReadAllText(GetViewPath("profile.html"));
             html = html.Replace("{{USER_NAME}}", user.Name);
             html = html.Replace("{{USER_EMAIL}}", user.Email);
 
@@ -65,7 +65,7 @@ namespace Controllers
             }
             sessionId = SessionManager.CreateSession(email);
 
-            var html = File.ReadAllText("../../../Views/profile.html");
+            var html = File.ReadAllText(GetViewPath("profile.html"));
             html = html.Replace("{{USER_NAME}}", user.Name);
             html = html.Replace("{{USER_EMAIL}}", user.Email);
 
@@ -75,7 +75,14 @@ namespace Controllers
         public string Logout(string sessionId)
         {
             SessionManager.RemoveSession(sessionId);
-            return File.ReadAllText("../../../Views/index.html");
+            return File.ReadAllText(GetViewPath("index.html"));
         }
+
+        private string GetViewPath(string filename)
+        {
+            string baseDir = AppContext.BaseDirectory;
+            var projectDir = Path.GetFullPath(Path.Combine(baseDir, @"../../../Views"));
+            return Path.Combine(projectDir, filename);
+        }   
     }
 }

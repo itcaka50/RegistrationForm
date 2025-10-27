@@ -67,6 +67,7 @@ namespace RegistrationForm
                     if (!string.IsNullOrEmpty(newSessionId))
                     {
                         header += $"Set-Cookie: sessionId={newSessionId}; Path=/; HttpOnly\r\n";
+                        Console.WriteLine($"Sending Set-Cookie: sessionId={newSessionId}");
                     }
 
                     header += "Connection: close\r\n\r\n";

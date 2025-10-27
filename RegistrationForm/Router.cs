@@ -30,27 +30,31 @@ namespace RegistrationForm
             {
                 if (path == "/" || path == "/index.html")
                 {
-                    return File.ReadAllText("../../../Views/index.html");
+                    //return File.ReadAllText("../../../Views/index.html");
+                    return File.ReadAllText(GetViewPath("index.html"));
                 }
 
                 if (path == "/register.html")
                 {
-                    return File.ReadAllText("../../../Views/register.html");
+                    //return File.ReadAllText("../../../Views/register.html");
+                    return File.ReadAllText(GetViewPath("register.html"));
                 }
 
                 if (path == "/login.html")
                 {
-                    return File.ReadAllText("../../../Views/login.html");
+                    //return File.ReadAllText("../../../Views/login.html");
+                    return File.ReadAllText(GetViewPath("login.html"));
                 }
 
                 if (path == "/style.css")
                 {
-                    return File.ReadAllText("../../../Views/style.css");
+                    //return File.ReadAllText("../../../Views/style.css");
+                    return File.ReadAllText(GetViewPath("style.css"));
                 }
 
                 if (path == "/captcha.png")
                 {
-                    
+
                 }
 
                 if (path == "/profile.html")
@@ -61,7 +65,8 @@ namespace RegistrationForm
                         return "<link rel=\"stylesheet\" href=\"style.css\"><h3>Please login first!</h3><a href='/login.html'>Login</a>";
                     }
                     var user = Database.Database.GetUser(session.Email);
-                    var html = File.ReadAllText("../../../Views/profile.html");
+                    //var html = File.ReadAllText("../../../Views/profile.html");
+                    var html = File.ReadAllText(GetViewPath("profile.html"));
                     html = html.Replace("{{USER_NAME}}", user.Name);
                     html = html.Replace("{{USER_EMAIL}}", user.Email);
 
@@ -75,7 +80,8 @@ namespace RegistrationForm
                     {
                         return "<link rel=\"stylesheet\" href=\"style.css\"><h3>Please login first!</h3><a href='/login.html'>Login</a>";
                     }
-                    return File.ReadAllText("../../../Views/change.html");
+                    //return File.ReadAllText("../../../Views/change.html");
+                    return File.ReadAllText(GetViewPath("change.html"));
                 }
 
                 if (path == "/logout")
@@ -87,7 +93,7 @@ namespace RegistrationForm
 
             if (method == "POST")
             {
-                
+
                 var body = "";
                 for (int i = 0; i < lines.Length; i++)
                 {
@@ -140,7 +146,7 @@ namespace RegistrationForm
                         out newSessionId
                     );
 
-                    
+
                 }
 
                 if (path == "/change")
@@ -172,10 +178,17 @@ namespace RegistrationForm
                 }
             }
 
-            
+
 
 
             return "<h2>404 Not Found</h2>";
         }
+    
+        private string GetViewPath(string filename)
+        {
+            string baseDir = AppContext.BaseDirectory;
+            var projectDir = Path.GetFullPath(Path.Combine(baseDir, @"../../../Views"));
+            return Path.Combine(projectDir, filename);
+        }   
     }
 }

@@ -6,38 +6,57 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
+using SkiaSharp;
 
 namespace RegistrationForm.Utils
 {
-        public static class Captcha
+    public static class Captcha
+    {
+        public static (string code, byte[] image) GenerateCaptcha()
         {
-            public static (string code, byte[] image) GenerateCaptcha()
+            var rnd = new Random();
+            var code = rnd.Next(1000, 9999).ToString();
+
+            using var bmp = new SKBitmap(100, 40);
+            using var canvas = new SKCanvas(bmp);
+            canvas.Clear(SKColors.White);
+
+            using var paint = new SKPaint
             {
-                var rnd = new Random();
-                var code = rnd.Next(1000, 9999).ToString();
+                Color = SKColors.Black,
+                TextSize = 24,
+                IsAntialias = true,
+                Typeface = SKTypeface.FromFamilyName("Arial")
+            };
 
-                using var bmp = new Bitmap(100, 40);
-                using var g = Graphics.FromImage(bmp);
-                g.Clear(Color.White);
-                g.DrawString(code, new System.Drawing.Font("Arial", 20), Brushes.Black, 10, 5);
+            canvas.DrawText(code, 10, 30, paint);
+            canvas.Flush();
 
-                byte[] imageBytes;
-                
-                using (var ms  = new MemoryStream()) 
-                {
-                    bmp.Save(ms, ImageFormat.Png);
-                string path = @"../../../Views/captcha.png";
-                Directory.CreateDirectory(Path.GetDirectoryName(path)); 
-                bmp.Save(path, ImageFormat.Png);
-                    imageBytes = ms.ToArray();
-                }
+            using var image = SKImage.FromBitmap(bmp);
+            using var data = image.Encode(SKEncodedImageFormat.Png, 100);
 
-                return (code, imageBytes);
-            }
+            byte[] imageBytes = data.ToArray();
+
+            string path = GetViewPath("captcha.png");
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            File.WriteAllBytes(path, imageBytes);
+
+            return (code, imageBytes);
         }
-
-        public static class CaptchaStorage
+        
+        private static string GetViewPath(string filename)
         {
-            public static string CurrentCode { get; set; } = "";
-        }
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string filePath = Path.Combine(baseDir, "..", "..", "..", "Views", filename);
+            return Path.GetFullPath(filePath);
+        } 
+    }
+
+    public static class CaptchaStorage
+    {
+        public static string CurrentCode { get; set; } = "";
+
+    }
+
+        
 }
